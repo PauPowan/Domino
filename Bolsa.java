@@ -1,33 +1,24 @@
 
 /**
- * Write a description of class Bolsa here.
- *
- * @author (your name)
- * @version (a version number or a date)
+Crea todas las piezas que seran usadas en el juego.
  */
 public class Bolsa
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class Bolsa
-     */
+    private Pieza bolsa[]= new Pieza[28];
     public Bolsa()
     {
-        // initialise instance variables
-        x = 0;
+        
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    public void LlenarBolsa(){
+        int h=0;
+        for(int i=0;i<7;i++){
+            for(int j=i;j<7;j++){
+                bolsa[h]=new Pieza(i,j);
+                h++;
+            } 
+
+        }
     }
 }
+

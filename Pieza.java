@@ -1,33 +1,25 @@
 
 /**
- * Write a description of class Piezas here.
- *
- * @author (your name)
- * @version (a version number or a date)
+  Clase para cada Pieza del juego.
  */
 public class Pieza
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class Piezas
-     */
-    public Pieza()
+    private int valorIzquierda;
+    private int valorDerecha;
+    public Pieza(int izq,int der)
     {
-        // initialise instance variables
-        x = 0;
+     valorIzquierda =izq;
+     valorDerecha = der;
+        
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
+    
+    public int GetIzquierda()
     {
-        // put your code here
-        return x + y;
+        return  valorIzquierda;
+    }
+    public int GetDerecha()
+    {
+        return  valorDerecha;
     }
 }
