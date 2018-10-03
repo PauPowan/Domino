@@ -22,4 +22,7 @@ public class Pieza
     {
         return  valorDerecha;
     }
+    
+   
+    
 }
