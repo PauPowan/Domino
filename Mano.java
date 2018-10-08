@@ -1,33 +1,27 @@
 
 /**
- * Write a description of class Mano here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ Piezas que posee el jugador.
  */
 public class Mano
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class Mano
-     */
+    private int piezasEnMano;
+    private Pieza mano[];
     public Mano()
     {
-        // initialise instance variables
-        x = 0;
+      piezasEnMano=0;  
+      mano= new Pieza[21];
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    public void AñadirPieza(Pieza pieza){
+        mano[piezasEnMano]=pieza;
+        piezasEnMano++;
+    }
+    public void QuitarPieza(int numeroPieza){
+        mano[numeroPieza]=null;
+        piezasEnMano--;
+    }
+    public void Imprimir(){
+       for(int i=0;i<piezasEnMano;i++){
+       System.out.println("["+mano[i].GetIzquierda()+"|"+mano[i].GetDerecha()+"]");
+    }
     }
 }

@@ -1,33 +1,24 @@
 
 /**
- * Write a description of class Dealer here.
- *
- * @author (your name)
- * @version (a version number or a date)
+-Reparte Cartas
  */
 public class Dealer
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class Dealer
-     */
+    
     public Dealer()
     {
-        // initialise instance variables
-        x = 0;
-    }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
     }
+    public void Repartir(Mano mano,Bolsa bolsa){
+        Pieza piezaASacar;
+        for(int i=0;i<7;i++){
+            DarPieza(mano,bolsa);
+        }
+    }
+    public void DarPieza(Mano mano,Bolsa bolsa){
+        Pieza piezaADar;
+        piezaADar=bolsa.SacarPieza();
+        mano.AñadirPieza(piezaADar);
+    }
+   
 }

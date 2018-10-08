@@ -4,10 +4,12 @@ Crea todas las piezas que seran usadas en el juego.
  */
 public class Bolsa
 {
-    private Pieza bolsa[]= new Pieza[28];
+    private Pieza bolsa[];
+    private int piezasTotales;
     public Bolsa()
     {
-        
+        bolsa= new Pieza[28];
+        piezasTotales=bolsa.length-1;
     }
 
     public void LlenarBolsa(){
@@ -35,6 +37,13 @@ public class Bolsa
         temp=bolsa[Posicion1];
         bolsa[Posicion1]=bolsa[Posicion2];
         bolsa[Posicion2]=temp;
+    }
+    
+     public Pieza SacarPieza(){
+        Pieza piezaASacar=bolsa[piezasTotales];
+        bolsa[piezasTotales]=null;
+        piezasTotales--;
+        return piezaASacar;
     }
 }
 
