@@ -50,8 +50,8 @@ public class Domino
         Jugador jugadorB= new Jugador(jugB);
         dealer.Repartir(manoA,bolsa);
         dealer.Repartir(manoB,bolsa);
-        manoA.Imprimir();
-        manoB.Imprimir();
+        //manoA.Imprimir();
+        //manoB.Imprimir();
         int turno=0;
         do{
             turno++;

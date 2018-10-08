@@ -26,9 +26,9 @@ public class Bolsa
     public void Barajar(){
         int Temp1;
         int Temp2;
-        for(int i=0;i<30;i++){
-            Temp1=(int)(Math.random()*27);
-            Temp2=(int)(Math.random()*27);
+        for(int i=0;i<60;i++){
+            Temp1=(int)(Math.random()*piezasTotales);
+            Temp2=(int)(Math.random()*piezasTotales);
             Swap(Temp1,Temp2);
         }
     }

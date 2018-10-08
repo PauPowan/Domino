@@ -1,6 +1,6 @@
 
 /**
- Piezas que posee el jugador.
+Piezas que posee el jugador.
  */
 public class Mano
 {
@@ -8,20 +8,20 @@ public class Mano
     private Pieza mano[];
     public Mano()
     {
-      piezasEnMano=0;  
-      mano= new Pieza[21];
+        piezasEnMano=0;  
+        mano= new Pieza[21];
     }
+
     public void AñadirPieza(Pieza pieza){
         mano[piezasEnMano]=pieza;
         piezasEnMano++;
     }
-    public void QuitarPieza(int numeroPieza){
+
+    public Pieza QuitarPieza(int numeroPieza){
+        Pieza piezaASacar=mano[piezasEnMano];
         mano[numeroPieza]=null;
         piezasEnMano--;
+        return piezaASacar;
     }
-    public void Imprimir(){
-       for(int i=0;i<piezasEnMano;i++){
-       System.out.println("["+mano[i].GetIzquierda()+"|"+mano[i].GetDerecha()+"]");
-    }
-    }
+
 }
