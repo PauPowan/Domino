@@ -38,7 +38,7 @@ public class Dealer
             }           
         }while(!par);
     }
-    
+
     public int primerTurno(Jugador[] jugador){
         int jugadorDePiezaMayor;
         if(jugador[0].parMayor()[0]>jugador[1].parMayor()[0]){
@@ -48,8 +48,21 @@ public class Dealer
         }
         return jugadorDePiezaMayor;
     }
-    public void IniciarJuego(){
 
+    public int[] calcularGanadorYPuntaje(Jugador[] jugador){
+        int ganador[]= new int[2];
+
+        int punt1=jugador[0].getPuntajeMano();
+        int punt2=jugador[1].getPuntajeMano();
+        if(punt1<=punt2){
+            ganador[0]=0;
+            ganador[1]=punt2;
+        }else{
+            ganador[0]=1;
+            ganador[1]=punt1;
+        }
+        jugador[ganador[0]].sumarPuntos(ganador[1]);
+        return ganador;
     }
-
 }
+

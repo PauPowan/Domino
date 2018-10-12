@@ -24,8 +24,8 @@ public class Domino
             opc=interfaz.imprimirMenu();
             switch(opc){
                 case "1":
-                String a=interfaz.escogerJugador("A");
-                String b=interfaz.escogerJugador("B");
+                String a=interfaz.escogerJugador("1");
+                String b=interfaz.escogerJugador("2");
                 enfrentamientoSimple(a,b);
                 break;
                 case "2":
@@ -45,14 +45,18 @@ public class Domino
         jugador[0]= new Jugador(jugA);
         jugador[1]= new Jugador(jugB);   
         int partida=1;
+        int ganador;
 
         do{            
-            duelo(partida,jugador) ; 
-        }while(partida<1);
-        return 5;
+            ganador=duelo(partida,jugador) ; 
+            partida++;
+        }while(jugador[ganador].getPuntos()<100);
+        interfaz.ganador(ganador+1);
+        return ganador;
     }
 
-    public  void duelo(int partida,Jugador[] jugador){
+    public  int duelo(int partida,Jugador[] jugador){
+        int[] ganador= new int[2];
         int turno=1;
         int turnoJugador;
         int turnosPasados=0;
@@ -64,21 +68,28 @@ public class Domino
         bolsa.llenarBolsa();
         bolsa.barajar();
         dealer.repartirPrimerRonda(bolsa,jugador);
-        turnoJugador=dealer.primerTurno(jugador);        
+        turnoJugador=dealer.primerTurno(jugador);
+        interfaz.partida(partida);
         do{            
             pasoTurno=jugador[turnoJugador].ponerPieza(tablero,turno,bolsa);
             if(pasoTurno){
                 turnosPasados++;  
             }else{
-             turnosPasados=0;
+                turnosPasados=0;
             }
-            turnoJugador=cambiarTurno(turnoJugador);
-            interfaz.tablero(jugador[0].getMano(),jugador[1].getMano(),tablero.getPiezasDelTablero());
-            interfaz.esperarTecla();
-            turno++;
+            interfaz.tablero(jugador[0].getMano(),jugador[1].getMano(),tablero.getPiezasDelTablero(),turno);
+            
+            if(jugador[turnoJugador].getPiezasEnMano()==0){
+                turnosPasados=2;
+            }else{
+                turnoJugador=cambiarTurno(turnoJugador);
+                turno++;
+            }
+            
         }while(turnosPasados<2);
-        puntaje1=jugador[0].puntajeMano();
-        puntaje2=jugador[1].puntajeMano();
+        ganador=dealer.calcularGanadorYPuntaje(jugador);
+        interfaz.ganadorPartida(ganador[0]+1,ganador[1]);
+        return ganador[0];
     }
 
     public int cambiarTurno(int turno){

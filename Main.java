@@ -10,8 +10,12 @@ public class Main
 
     public Main()
     {
-       Domino domino=new Domino();
+     Domino domino=new Domino();
     }
-
+    
+    public static void main(String[]args){
+        Domino domino=new Domino();
+    }
+    
  
 }

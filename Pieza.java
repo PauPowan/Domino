@@ -34,6 +34,12 @@ public class Pieza
             }
         }
     }
+    public int getValorPieza(){
+        int puntajeTotal=0;
+        puntajeTotal+=this.getDerecha();
+        puntajeTotal+=this.getIzquierda();
+        return puntajeTotal;
+    }
 
     private void darVuelta(){
         int temp=this.valorIzquierda;

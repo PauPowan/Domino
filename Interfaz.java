@@ -47,14 +47,15 @@ public class Interfaz
             System.out.print('\u000C');
             System.out.print("~~~~~~~~~~~~DOMINO~~~~~~~~~~~\n"+
                 " Escoga el jugador "+identificadorJugador+" que sera usado:    \n\n"+
-                " 1. Jugador 1                    \n"+
-                " 2. Jugador 2                    \n"+
-                " 3. Jugador 3                    \n"+
+                " 1. Jugador A                    \n"+
+                " 2. Jugador B                    \n"+
+                " 3. Jugador C                    \n"+
                 " 4. Dummy                     \n\n");
             numeroJugador=input.next();
         }while(!(numeroJugador.matches("^[1-4]+$")));
 
         return numeroJugador;
+
     }
 
     public void turno(String jugador,int turno,Pieza[] tablero){
@@ -74,6 +75,11 @@ public class Interfaz
 
     }
 
+    public void ganador(int ganador){
+        System.out.println("\n\nFELICIDADES!\nGano el jugador: "+ Integer.toString(ganador));
+        esperarTecla();
+    }
+
     public void mostrarPiezas(Pieza[] piezas){
         for(int i=0;i<piezas.length;i++){
             if(piezas[i]!=null){
@@ -84,18 +90,28 @@ public class Interfaz
             }
         }
     }
-
-    public void tablero(Pieza[] mano1,Pieza[] mano2,Pieza[] tablero){
-        System.out.println("\n    Jugador 1:\n");  
+    public void partida(int part){
+            System.out.println("\n\n-----------------------------------\n"+
+                               "            Partida :"+Integer.toString(part)); 
+    }
+    public void tablero(Pieza[] mano1,Pieza[] mano2,Pieza[] tablero,int turno){
+         System.out.println("\n\n------------------\nTurno :"+Integer.toString(turno)); 
+        System.out.println("\n\n    Jugador 1:");  
         mostrarPiezas(mano1);
-        System.out.println("\n    Jugador 2:\n");  
+        System.out.println("\n\n    Jugador 2:");  
         mostrarPiezas(mano2);
-        System.out.println("\n    Tablero:\n");  
+        System.out.println("\n\n    Tablero:");  
         mostrarPiezas(tablero);
+        esperarTecla();
     }
 
     public void esperarTecla(){
         input.next();
     }
 
+    public void ganadorPartida(int ganador,int puntaje){
+        System.out.println("\n\nGano el jugador: "+ Integer.toString(ganador)+
+            "\nPuntos: "+Integer.toString(puntaje));
+        esperarTecla();
+    }
 }

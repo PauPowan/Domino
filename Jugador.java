@@ -16,6 +16,18 @@ public class Jugador
         estrategia=numeroJugador;
     }
 
+    public void sumarPuntos(int puntosMas){
+        this.puntos+=puntosMas;
+    }
+
+    public int getPuntos(){
+        return puntos;
+    }
+
+    public int getPiezasEnMano(){
+        return  piezasEnMano;
+    }
+
     public void tomarPieza(Pieza pieza){        
         mano[piezasEnMano]=new Pieza(-1,-1);
         mano[piezasEnMano].setPieza(pieza);
@@ -106,11 +118,42 @@ public class Jugador
                     }
                     break;
                     case "2":
+                    for(int i=piezasEnMano-1;i>=0;i--){
+                        if(mano[i].getIzquierda()==der||mano[i].getDerecha()==der){
+                            posicionPieza=i;
+                            direccion="der";
+                            valorBorde=der;
+                        }
+                        if (mano[i].getIzquierda()==izq||mano[i].getDerecha()==izq){
+                            posicionPieza=i;
+                            direccion="izq";
+                            valorBorde=izq;
+                        }                        
+                    }
                     break;
                     case "3":
-                    break;
-                    case "4":
-                    break;
+                    int mayor=0;
+
+                    for(int i=0;i<piezasEnMano;i++){
+                        if (mano[i].getIzquierda()==izq||mano[i].getDerecha()==izq){
+                            if(mayor<=mano[i].getValorPieza()){
+                                mayor=mano[i].getValorPieza();
+                                posicionPieza=i;
+                                direccion="izq";
+                                valorBorde=izq;
+                            }
+                        }
+                        if((mano[i].getIzquierda()==der||mano[i].getDerecha()==der)&&posicionPieza==-1){
+                            if(mayor<=mano[i].getValorPieza()){
+                                mayor=mano[i].getValorPieza();
+                                posicionPieza=i;
+                                direccion="izq";
+                                valorBorde=izq;
+                            }
+                        }
+
+                    }
+                    break;                    
                     default:
 
                 }
@@ -127,7 +170,7 @@ public class Jugador
             }while(!salir);
 
         }        
-        if(bolsa.getPiezasTotales()>0){
+        if(bolsa.getPiezasTotales()>0&&posicionPieza!=-1){
             mano[posicionPieza].acomodarPieza(valorBorde,direccion);                
             pieza.setPieza(darPieza(posicionPieza));
             acomodarMano();
@@ -149,12 +192,12 @@ public class Jugador
         }
     }
 
-    public int puntajeMano(){
+    public int getPuntajeMano(){
         int puntajeTotal=0;
-        for(int i=0;i<mano.length;i++){
-            puntajeTotal+=mano[i].getDerecha();
-            puntajeTotal+=mano[i].getIzquierda();
+        for(int i=0;i<piezasEnMano;i++){
+            puntajeTotal+=mano[i].getValorPieza();
         }
         return puntajeTotal;
     }
+
 }
