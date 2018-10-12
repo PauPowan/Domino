@@ -76,6 +76,7 @@ public class Interfaz
     }
 
     public void ganador(int ganador){
+        System.out.print('\u000C');
         System.out.println("\n\nFELICIDADES!\nGano el jugador: "+ Integer.toString(ganador));
         esperarTecla();
     }
@@ -99,19 +100,20 @@ public class Interfaz
     public void tablero(Pieza[] mano1,Pieza[] mano2,String est1,String est2,Pieza[] tablero,int turno){
         System.out.println("\n\n------------------\nTurno :"+Integer.toString(turno)); 
         //if(est1.equals("4")){
-            System.out.println("\n\n    Jugador 1: ");  
-            mostrarPiezas(mano1);
+        System.out.println("\n\n    Jugador 1: ");  
+        mostrarPiezas(mano1);
         //}
         //if(est2.equals("4")){
-            System.out.println("\n\n    Jugador 2: ");  
-            mostrarPiezas(mano2);
+        System.out.println("\n\n    Jugador 2: ");  
+        mostrarPiezas(mano2);
         ///}
-        System.out.println("\n\n    Tablero:");  
+        System.out.println("\n\n    Tablero: ");  
         mostrarPiezas(tablero);
     }
 
     public void esperarTecla(){
         System.out.println("\n**Presione Enter para continuar**\n");
+        input.nextLine();
         input.nextLine();
     }
 
@@ -142,6 +144,61 @@ public class Interfaz
             }while(pos[1]>2||pos[1]<1);
         }
         return pos;
+    }
+
+    public void torneo(String j1,String j2,String j3,String j4){
+        System.out.print('\u000C');
+        System.out.println("Torneo:                   \n\n"+
+            "        Ganador!          \n"+
+            "           |              \n"+
+            "       ____|____          \n"+
+            "      |         |         \n"+
+            "    __|__     __|__       \n"+
+            "   |     |   |     |      \n"+
+            "   |     |   |     |      \n"+
+            "   "+j1+"     "+j2+"   "+j3+"     "+j4+"      ");        
+    }
+
+    public void torneo(String j1,String j2,String j3){
+        System.out.print('\u000C');
+        System.out.println("Torneo:                   \n\n"+
+            "        Ganador!          \n"+
+            "           |              \n"+
+            "       ____|____          \n"+
+            "      |         |         \n"+
+            "      |       __|__       \n"+
+            "      "+j1+"      |     |      \n"+
+            "             |     |      \n"+
+            "             "+j2+"     "+j3+"      ");
+
+    }
+
+    public void torneo(String j1,String j2){
+        System.out.print('\u000C');
+        System.out.println("Torneo:                   \n\n"+
+            "        Ganador!          \n"+
+            "           |              \n"+
+            "       ____|____          \n"+
+            "      |         |         \n"+
+            "      "+j1+"         "+j2+"         \n");
+
+    }
+
+    public void ronda(String j1,String j2,String numero){
+        System.out.println("Ronda: "+numero+
+            "\nJugador1: estrategia "+j1+
+            "\nJugador2: estrategia "+j2);
+        esperarTecla();
+
+    }
+
+    public void ganadorTorneo(String ganador){
+        System.out.print('\u000C');
+        System.out.println("\n\n*********************************************************** \n\n"+
+                           "                      FELICIDADES          \n\nEl torneo fue ganado por el jugador con la estrategia: "+ganador+
+                           "\n\n************************************************************ ");
+        esperarTecla();
+
     }
 
     public void ganadorPartida(int ganador,int puntaje){

@@ -27,7 +27,9 @@ public class Jugador
     public int getPiezasEnMano(){
         return  piezasEnMano;
     }
-
+    public String getEstrategia(){
+        return  estrategia;
+    }
     public void tomarPieza(Pieza pieza){        
         mano[piezasEnMano]=new Pieza(-1,-1);
         mano[piezasEnMano].setPieza(pieza);
@@ -42,9 +44,7 @@ public class Jugador
         return piezaASacar;
     }
 
-    public String getEstrategia(){
-        return estrategia;
-    }
+
 
     public void vaciarMano(){
         for(int i=0;i<piezasEnMano;i++){ 

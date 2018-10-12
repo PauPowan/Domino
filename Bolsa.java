@@ -23,7 +23,9 @@ public class Bolsa
         }
 
     }
-
+    public Pieza[] getBolsa(){
+        return bolsa;
+    }
     public void barajar(){
         int Temp1;
         int Temp2;
@@ -34,11 +36,11 @@ public class Bolsa
         }
     }
 
-    private void swap(int Posicion1,int Posicion2){
-        Pieza temp=new Pieza(0,0);
-        temp=bolsa[Posicion1];
-        bolsa[Posicion1]=bolsa[Posicion2];
-        bolsa[Posicion2]=temp;
+    private void swap(int posicion1,int posicion2){
+        Pieza temp=new Pieza(-1,-1);
+        temp.setPieza(bolsa[posicion1]);
+        bolsa[posicion1].setPieza(bolsa[posicion2]);
+        bolsa[posicion2].setPieza(temp);
     }
 
     public Pieza sacarPieza(){
