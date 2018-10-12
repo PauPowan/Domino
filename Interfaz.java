@@ -90,23 +90,58 @@ public class Interfaz
             }
         }
     }
+
     public void partida(int part){
-            System.out.println("\n\n-----------------------------------\n"+
-                               "            Partida :"+Integer.toString(part)); 
+        System.out.println("\n\n-----------------------------------\n"+
+            "            Partida :"+Integer.toString(part)); 
     }
-    public void tablero(Pieza[] mano1,Pieza[] mano2,Pieza[] tablero,int turno){
-         System.out.println("\n\n------------------\nTurno :"+Integer.toString(turno)); 
-        System.out.println("\n\n    Jugador 1:");  
-        mostrarPiezas(mano1);
-        System.out.println("\n\n    Jugador 2:");  
-        mostrarPiezas(mano2);
+
+    public void tablero(Pieza[] mano1,Pieza[] mano2,String est1,String est2,Pieza[] tablero,int turno){
+        System.out.println("\n\n------------------\nTurno :"+Integer.toString(turno)); 
+        //if(est1.equals("4")){
+            System.out.println("\n\n    Jugador 1: ");  
+            mostrarPiezas(mano1);
+        //}
+        //if(est2.equals("4")){
+            System.out.println("\n\n    Jugador 2: ");  
+            mostrarPiezas(mano2);
+        ///}
         System.out.println("\n\n    Tablero:");  
         mostrarPiezas(tablero);
-        esperarTecla();
     }
 
     public void esperarTecla(){
-        input.next();
+        System.out.println("\n**Presione Enter para continuar**\n");
+        input.nextLine();
+    }
+
+    public void noValida(){
+        System.out.println("\nLa ficha no es valida con el borde escogido.\n\n");
+    }
+
+    public int[] preguntar(int piezasEnMano,int numero){
+        int pos[]=new int[2];
+        pos[0]=1;
+        pos[1]=1;
+        do{
+            if(pos[0]>piezasEnMano||pos[0]<0){
+                System.out.println(" Escoja una ficha válido.");
+            }
+            System.out.println("\n\n Que ficha desea escoger,Jugador "+Integer.toString(numero+1)+": (1-"+Integer.toString(piezasEnMano)+")\n( 0 para pasar y "+Integer.toString(piezasEnMano+1)+" para comer )\n");
+            pos[0]=input.nextInt();            
+        }while(pos[0]>piezasEnMano+1||pos[0]<0);
+        if(pos[0]!=0){
+            do{
+                if(pos[1]>2||pos[1]<1){
+                    System.out.println(" Escoja una direccion valido.");
+                }
+                System.out.println("\n\n De que lado desea ponerlo (numero):\n"+
+                    "     1-Izquierda\n"+
+                    "     2-Derecha\n");
+                pos[1]=input.nextInt();
+            }while(pos[1]>2||pos[1]<1);
+        }
+        return pos;
     }
 
     public void ganadorPartida(int ganador,int puntaje){

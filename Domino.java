@@ -62,6 +62,8 @@ public class Domino
         int turnosPasados=0;
         int puntaje1=0;
         int puntaje2=0;
+        boolean valido=true;
+        int[] posicion=new int[2];        
         boolean pasoTurno=false;
         Tablero tablero=new Tablero();
         Bolsa bolsa=new Bolsa();
@@ -70,23 +72,39 @@ public class Domino
         dealer.repartirPrimerRonda(bolsa,jugador);
         turnoJugador=dealer.primerTurno(jugador);
         interfaz.partida(partida);
-        do{            
-            pasoTurno=jugador[turnoJugador].ponerPieza(tablero,turno,bolsa);
-            if(pasoTurno){
-                turnosPasados++;  
-            }else{
-                turnosPasados=0;
+        do{ 
+
+            if(jugador[turnoJugador].getEstrategia().equals("4")&&turno!=1){
+                interfaz.tablero(jugador[0].getMano(),jugador[1].getMano(),jugador[0].getEstrategia(),jugador[1].getEstrategia(),tablero.getPiezasDelTablero(),turno);
+                do{
+                    if(!valido){
+                        interfaz.noValida(); 
+                    }
+                    posicion=interfaz.preguntar(jugador[turnoJugador].getPiezasEnMano(),turnoJugador);
+                    if(posicion[0]==0||bolsa.getPiezasTotales()>0){
+                        turnosPasados++;
+                        valido=true;
+                    }else{
+                        valido=jugador[turnoJugador].dummy(tablero,turno,bolsa,posicion);
+                    }
+                }while(!valido);
+            }else{    
+                pasoTurno=jugador[turnoJugador].ponerPieza(tablero,turno,bolsa);
+                interfaz.tablero(jugador[0].getMano(),jugador[1].getMano(),jugador[0].getEstrategia(),jugador[1].getEstrategia(),tablero.getPiezasDelTablero(),turno);
+                if(pasoTurno){
+                    turnosPasados++;  
+                }else{
+                    turnosPasados=0;
+                }
             }
-            interfaz.tablero(jugador[0].getMano(),jugador[1].getMano(),tablero.getPiezasDelTablero(),turno);
-            
             if(jugador[turnoJugador].getPiezasEnMano()==0){
                 turnosPasados=2;
             }else{
                 turnoJugador=cambiarTurno(turnoJugador);
                 turno++;
             }
-            
-        }while(turnosPasados<2);
+
+        }while(turnosPasados<2&&bolsa.getPiezasTotales()<28);
         ganador=dealer.calcularGanadorYPuntaje(jugador);
         interfaz.ganadorPartida(ganador[0]+1,ganador[1]);
         return ganador[0];

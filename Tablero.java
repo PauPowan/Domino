@@ -11,7 +11,7 @@ public class Tablero
     private int piezasEnTablero;
     public Tablero()
     {
-        tablero= new Pieza[28];
+        tablero= new Pieza[29];
         piezasEnTablero=0;
     }
 
