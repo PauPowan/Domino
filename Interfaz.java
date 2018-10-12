@@ -94,7 +94,7 @@ public class Interfaz
             System.out.println("\n\n-----------------------------------\n"+
                                "            Partida :"+Integer.toString(part)); 
     }
-    public void tablero(Pieza[] mano1,Pieza[] mano2,Pieza[] tablero,int turno){
+    public void tablero(Pieza[] mano1,Pieza[] mano2,Pieza[] tablero,int turno,Pieza[] bolsa){
          System.out.println("\n\n------------------\nTurno :"+Integer.toString(turno)); 
         System.out.println("\n\n    Jugador 1:");  
         mostrarPiezas(mano1);
@@ -102,10 +102,12 @@ public class Interfaz
         mostrarPiezas(mano2);
         System.out.println("\n\n    Tablero:");  
         mostrarPiezas(tablero);
-        esperarTecla();
+        System.out.println("\n\n    Bolsa:");  
+        mostrarPiezas(bolsa);
     }
 
     public void esperarTecla(){
+         System.out.println("\n\n **Presione ENTER para continuar\n");  
         input.next();
     }
 

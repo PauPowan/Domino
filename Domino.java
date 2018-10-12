@@ -29,6 +29,7 @@ public class Domino
                 enfrentamientoSimple(a,b);
                 break;
                 case "2":
+                torneo();
                 break;
                 case "3":
                 System.exit(0);
@@ -40,7 +41,7 @@ public class Domino
         System.exit(0);
     }
 
-    public int enfrentamientoSimple(String jugA,String jugB){
+    public Jugador enfrentamientoSimple(String jugA,String jugB){
         Jugador[] jugador=new Jugador[2];
         jugador[0]= new Jugador(jugA);
         jugador[1]= new Jugador(jugB);   
@@ -50,9 +51,11 @@ public class Domino
         do{            
             ganador=duelo(partida,jugador) ; 
             partida++;
+            jugador[0].vaciarMano();
+            jugador[1].vaciarMano();
         }while(jugador[ganador].getPuntos()<100);
         interfaz.ganador(ganador+1);
-        return ganador;
+        return jugador[ganador];
     }
 
     public  int duelo(int partida,Jugador[] jugador){
@@ -65,8 +68,6 @@ public class Domino
         boolean pasoTurno=false;
         Tablero tablero=new Tablero();
         Bolsa bolsa=new Bolsa();
-        bolsa.llenarBolsa();
-        bolsa.barajar();
         dealer.repartirPrimerRonda(bolsa,jugador);
         turnoJugador=dealer.primerTurno(jugador);
         interfaz.partida(partida);
@@ -77,7 +78,7 @@ public class Domino
             }else{
                 turnosPasados=0;
             }
-            interfaz.tablero(jugador[0].getMano(),jugador[1].getMano(),tablero.getPiezasDelTablero(),turno);
+            interfaz.tablero(jugador[0].getMano(),jugador[1].getMano(),tablero.getPiezasDelTablero(),turno,bolsa.getBolsa());
             
             if(jugador[turnoJugador].getPiezasEnMano()==0){
                 turnosPasados=2;
@@ -101,5 +102,31 @@ public class Domino
         }
         return nuevoTurno;
     }
+    public void torneo(){
+        String[] tipos={"1","2","3","3"};
+        barajar(tipos);
+        String j1=tipos[3];
+        String j2=tipos[1];
+        String j3=tipos[2];
+        String j4=tipos[0];
+        Jugador ganador1=enfrentamientoSimple(j1,j2);
+        Jugador ganador2=enfrentamientoSimple(j3,j4);
+        enfrentamientoSimple(ganador1.getEstrategia(),ganador2.getEstrategia());
+    }
+    private void barajar(String[] tipos){
+        int Temp1;
+        int Temp2;
+        for(int i=0;i<10;i++){
+            Temp1=(int)(Math.random()*tipos.length);
+            Temp2=(int)(Math.random()*tipos.length);
+            swap(Temp1,Temp2,tipos);
+        }
+    }
 
+    private void swap(int posicion1,int posicion2,String[] tipos){
+        String temp="";
+        temp=tipos[posicion1];
+        tipos[posicion1]=tipos[posicion2];
+        tipos[posicion2]=temp;
+    }
 }
