@@ -11,11 +11,13 @@ public class Bolsa
         bolsa= new Pieza[28];
         piezasTotales=bolsa.length-1;
     }
-
+    /**
+     * Metodo que llena la bolsa con las piezas.
+     */
     public void LlenarBolsa(){
         int h=0;
-        for(int i=0;i<7;i++){
-            for(int j=i;j<7;j++){
+        for(int i=0;i<7;i++){ //Crean y asignan el valor a las piezas 
+            for(int j=i;j<7;j++){ 
                 bolsa[h]=new Pieza(i,j);
                 h++;
             } 
@@ -23,6 +25,8 @@ public class Bolsa
         }
         
     }
+    
+    
     public void Barajar(){
         int Temp1;
         int Temp2;

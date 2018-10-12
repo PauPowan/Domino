@@ -1,6 +1,6 @@
 
 /**
-  Clase para cada Pieza del juego.
+  Clase para cada pieza del juego.
  */
 public class Pieza
 {
@@ -13,16 +13,14 @@ public class Pieza
         
     }
 
-    
     public int GetIzquierda()
     {
         return  valorIzquierda;
     }
+    
     public int GetDerecha()
     {
         return  valorDerecha;
     }
-    
-   
     
 }
