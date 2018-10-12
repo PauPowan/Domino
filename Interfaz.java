@@ -16,7 +16,7 @@ public class Interfaz
 
     }
 
-    public String ImprimirMenu()
+    public String imprimirMenu()
     {
 
         System.out.print('\u000C');
@@ -27,12 +27,12 @@ public class Interfaz
         return input.next();
     }
 
-    public void Imprimir(String mensaje)
+    public void imprimir(String mensaje)
     {
 
     }
 
-    public String EscogerJugador(String identificadorJugador){
+    public String escogerJugador(String identificadorJugador){
         String numeroJugador="1";
         do{
             if(!(numeroJugador.matches("^[1-4]+$"))){
@@ -57,27 +57,45 @@ public class Interfaz
         return numeroJugador;
     }
 
-    public void Turno(String jugador,int turno,Pieza[] tablero){
+    public void turno(String jugador,int turno,Pieza[] tablero){
         System.out.print("~~~~~~~~~~~~DOMINO~~~~~~~~~~~\n\n"+
             "Turno Numero "+turno+".\n"+
             "Jugador"+jugador);
-        ImprimirPiezas(tablero);   
+        imprimirPiezas(tablero);   
     }
 
-    public void ImprimirPiezas(Pieza[] piezas){
+    public void imprimirPiezas(Pieza[] piezas){
+
         for(int i=0;i<piezas.length;i++){
             if(piezas[i]!=null){
-                System.out.println("["+piezas[i].GetIzquierda()+"|"+piezas[i].GetDerecha()+"]");
+                System.out.println("["+piezas[i].getIzquierda()+"|"+piezas[i].getDerecha()+"]");
+            }
+        }
+
+    }
+
+    public void mostrarPiezas(Pieza[] piezas){
+        for(int i=0;i<piezas.length;i++){
+            if(piezas[i]!=null){
+                System.out.print(piezas[i]);
+                if(i%6==0&&i!=0){
+                    System.out.println();
+                }
             }
         }
     }
 
-    public void MostrarPieza(Pieza[] piezas,int cantidad){
-        for(int i=0;i<cantidad;i++){
-            System.out.print("["+piezas[i].GetIzquierda()+"|"+piezas[i].GetDerecha()+"]");
-            if(i%7==0&&i!=0){
-                System.out.println();
-            }
-        }
+    public void tablero(Pieza[] mano1,Pieza[] mano2,Pieza[] tablero){
+        System.out.println("\n    Jugador 1:\n");  
+        mostrarPiezas(mano1);
+        System.out.println("\n    Jugador 2:\n");  
+        mostrarPiezas(mano2);
+        System.out.println("\n    Tablero:\n");  
+        mostrarPiezas(tablero);
     }
+
+    public void esperarTecla(){
+        input.next();
+    }
+
 }

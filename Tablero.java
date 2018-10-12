@@ -15,45 +15,70 @@ public class Tablero
         piezasEnTablero=0;
     }
 
-    public void Ej(){
+    public void ej(){
         Pieza a =new Pieza(1,2);
         Pieza b =new Pieza(4,4);
         Pieza c =new Pieza(5,6);
-        AñadirPieza(a,"izq");
-        AñadirPieza(b,"izq");
-        AñadirPieza(c,"izq");
-        AñadirPieza(a,"derecha");
-        AñadirPieza(b,"izq");
-        AñadirPieza(c,"izq");
-        AñadirPieza(a,"izq");
-        AñadirPieza(b,"derecha");
-        AñadirPieza(c,"derecha");
+        agregarPieza(a,"izq");
+        agregarPieza(b,"izq");
+        agregarPieza(c,"izq");
+        agregarPieza(a,"derecha");
+        agregarPieza(b,"izq");
+        agregarPieza(c,"izq");
+        agregarPieza(a,"izq");
+        agregarPieza(b,"derecha");
+        agregarPieza(c,"derecha");
     }
 
-    public void AñadirPieza(Pieza pieza,String direccion){
+    public void agregarPieza(Pieza pieza,String direccion){
+        int posicion=0;
         if(direccion.equalsIgnoreCase("izq")){
-            for(int i=piezasEnTablero;i>=0;i--){
-                tablero[i+1]=tablero[i];
-            }
-            tablero[0]=pieza;
+            for(int i=piezasEnTablero;i>0;i--){
+                tablero[i]=new Pieza(-1,-1);
+                tablero[i].setPieza(tablero[i-1]);
+                tablero[i-1]=null;
+            }          
         }else{
-            tablero[piezasEnTablero+1]=pieza;
+            posicion=piezasEnTablero;
         }
+        tablero[posicion]=new Pieza(-1,-1);
+        tablero[posicion].setPieza(pieza);
         piezasEnTablero++;
     }
 
-    public void VaciarTablero(){
+    public void vaciarTablero(){
         for(int i=0;i<=piezasEnTablero;i++){
             tablero[i]=null;
         }
         piezasEnTablero=0;
     }
 
-    public Pieza[] GetPiezasDelTablero(){
+    public Pieza[] getPiezasDelTablero(){
         return tablero;
     }
 
-    public int GetCantidadDePiezas(){
+    public int getCantidadDePiezas(){
         return piezasEnTablero;
+    }
+
+    public int getValorPiezaIzquierda(){
+        int izq;
+        if(tablero[0]==null){
+            izq=0;
+        }else{
+         izq=tablero[0].getIzquierda();
+        }
+        return izq;
+    }
+
+    public int getValorPiezaDerecha(){
+        int der;
+        if(piezasEnTablero==0){
+            der=0;
+        }else{
+         der=tablero[piezasEnTablero-1].getDerecha();
+        }
+        return der;
+       
     }
 }

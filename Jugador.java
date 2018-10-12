@@ -1,6 +1,6 @@
 
 /**
- Jugador 
+Jugador 
  */
 public class Jugador
 {
@@ -15,30 +15,146 @@ public class Jugador
         puntos=0;
         estrategia=numeroJugador;
     }
-    public void TomarPieza(Pieza pieza){
-        mano[piezasEnMano]=pieza;
+
+    public void tomarPieza(Pieza pieza){        
+        mano[piezasEnMano]=new Pieza(-1,-1);
+        mano[piezasEnMano].setPieza(pieza);
         piezasEnMano++;
     }
 
-    public Pieza DarPieza(int numeroPieza){
-        Pieza piezaASacar=mano[piezasEnMano];
+    public Pieza darPieza(int numeroPieza){
+        Pieza piezaASacar=new Pieza(0,0);
+        piezaASacar.setPieza(mano[numeroPieza]);
         mano[numeroPieza]=null;
         piezasEnMano--;
         return piezaASacar;
     }
-    public void ReiniciarMano(){
+
+    public void vaciarMano(){
         for(int i=0;i<piezasEnMano;i++){ //Aquiiiiiiiiiiiiiiiiiiiiiiii
-            
+            mano[i]=null; 
         }
+        piezasEnMano=0;
     }
-    
-    public boolean ExistePar(){
+
+    public Pieza[] getMano(){
+        return mano;
+    }
+
+    public boolean existePar(){
         Boolean par=false;
         for(int i=0;i<piezasEnMano;i++){
-            if(mano[i].GetIzquierda()==mano[i].GetDerecha()){
+            if(mano[i].getIzquierda()==mano[i].getDerecha()){
                 par=true;
             }
         }
         return par;
+    }
+
+    public int[] parMayor(){
+        int[] piezaMayor=new int[2];
+        int valorMayor=-1;
+        int posicionDelMayor=0;
+        for(int i=0;i<piezasEnMano;i++){
+            if(mano[i].getIzquierda()==mano[i].getDerecha()){
+                if(mano[i].getIzquierda()>valorMayor){
+                    valorMayor=mano[i].getIzquierda();
+                    posicionDelMayor=i;
+                }
+            }
+        }
+        piezaMayor[0]=valorMayor;
+        piezaMayor[1]=posicionDelMayor;
+        return piezaMayor;
+    }
+
+    public Pieza darParMayor(){
+        Pieza piezaMayor=null;
+        piezaMayor=darPieza(parMayor()[1]);
+        return piezaMayor;
+    }
+
+    public boolean ponerPieza(Tablero tablero,int turno,Bolsa bolsa){
+        int posicionPieza=-1;
+        boolean salir=false;
+        boolean fin=false;
+        int valorBorde=0;
+        int pasar=-1;
+        Pieza pieza=new Pieza(-1,-1);
+        String direccion="izq";
+        int izq=tablero.getValorPiezaIzquierda();
+        int der=tablero.getValorPiezaDerecha();
+        if(turno==1){
+            tablero.agregarPieza(darParMayor(),direccion);
+            acomodarMano();
+        }else{
+            do{
+                switch(this.estrategia){
+                    case "1":
+                    for(int i=0;i<piezasEnMano;i++){
+                        if (mano[i].getIzquierda()==izq||mano[i].getDerecha()==izq){
+                            posicionPieza=i;
+                            direccion="izq";
+                            valorBorde=izq;
+                        }
+                        if(mano[i].getIzquierda()==der||mano[i].getDerecha()==der){
+                            posicionPieza=i;
+                            direccion="der";
+                            valorBorde=der;
+                        }
+
+                    }
+                    break;
+                    case "2":
+                    break;
+                    case "3":
+                    break;
+                    case "4":
+                    break;
+                    default:
+
+                }
+                if(posicionPieza==-1){
+                    salir=false;
+                    if(bolsa.getPiezasTotales()>0){
+                        tomarPieza(bolsa.sacarPieza());
+                    }else{
+                        salir=true;
+                    }
+                }else{
+                    salir=true;
+                }
+            }while(!salir);
+
+        }        
+        if(bolsa.getPiezasTotales()>0){
+            mano[posicionPieza].acomodarPieza(valorBorde,direccion);                
+            pieza.setPieza(darPieza(posicionPieza));
+            acomodarMano();
+            tablero.agregarPieza(pieza,direccion);
+        }else{
+            fin=true;
+        }
+        return fin;
+    }
+
+    private void acomodarMano(){
+        for(int i=0;i<mano.length;i++){
+            if(mano[i]==null){
+                for(int j=i;j<mano.length-1;j++){                    
+                    mano[j]=mano[j+1];
+                    mano[j+1]=null;
+                }
+            }
+        }
+    }
+
+    public int puntajeMano(){
+        int puntajeTotal=0;
+        for(int i=0;i<mano.length;i++){
+            puntajeTotal+=mano[i].getDerecha();
+            puntajeTotal+=mano[i].getIzquierda();
+        }
+        return puntajeTotal;
     }
 }
