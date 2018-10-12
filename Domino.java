@@ -8,6 +8,7 @@
 public class Domino
 {
     private Interfaz interfaz;
+    private Dealer dealer=new Dealer();
     //bolsa.LlenarBolsa();
     public Domino()
     {   
@@ -40,24 +41,36 @@ public class Domino
     }
 
     public int EnfrentamientoSimple(String jugA,String jugB){
-        Dealer dealer=new Dealer();
-        Bolsa bolsa=new Bolsa();
-        bolsa.LlenarBolsa();
-        bolsa.Barajar();
-        Mano manoA=new Mano();
-        Mano manoB=new Mano();
+
+        //Mano manoA=new Mano();
+        //Mano manoB=new Mano();
         Jugador jugadorA= new Jugador(jugA);
         Jugador jugadorB= new Jugador(jugB);
-        dealer.Repartir(manoA,bolsa);
-        dealer.Repartir(manoB,bolsa);
-        manoA.Imprimir();
-        manoB.Imprimir();
+        //dealer.Repartir(manoA,bolsa);
+        //dealer.Repartir(manoB,bolsa);
+        //manoA.Imprimir();
+        //manoB.Imprimir();
+        int partida=0;
         int turno=0;
         do{
-            turno++;
+
             //interfaz.Turno("A",turno);
         }while(false);
         return 5;
     }
-}
 
+    public  void Duelo(int partida,Jugador j1,Jugador j2){
+        Bolsa bolsa=new Bolsa();
+        
+        do{
+            bolsa.LlenarBolsa();
+            bolsa.Barajar();
+            dealer.Repartir(j1,bolsa);
+            dealer.Repartir(j2,bolsa);
+        }while(j1.ExistePar()||j2.ExistePar());
+        
+        
+    }
+
+    
+}

@@ -72,9 +72,9 @@ public class Interfaz
         }
     }
 
-    public void MostrarTablero(Pieza[] tablero,int cantidad){
+    public void MostrarPieza(Pieza[] piezas,int cantidad){
         for(int i=0;i<cantidad;i++){
-            System.out.print("["+tablero[i].GetIzquierda()+"|"+tablero[i].GetDerecha()+"]");
+            System.out.print("["+piezas[i].GetIzquierda()+"|"+piezas[i].GetDerecha()+"]");
             if(i%7==0&&i!=0){
                 System.out.println();
             }

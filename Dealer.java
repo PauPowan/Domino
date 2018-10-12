@@ -9,16 +9,20 @@ public class Dealer
     {
 
     }
-    public void Repartir(Mano mano,Bolsa bolsa){
+    public void Repartir(Jugador jug,Bolsa bolsa){
         Pieza piezaASacar;
         for(int i=0;i<7;i++){
-            DarPieza(mano,bolsa);
+            DarPieza(jug,bolsa);
         }
     }
-    public void DarPieza(Mano mano,Bolsa bolsa){
+    public void DarPieza(Jugador jug,Bolsa bolsa){
         Pieza piezaADar;
         piezaADar=bolsa.SacarPieza();
-        mano.AñadirPieza(piezaADar);
+        jug.TomarPieza(piezaADar);
+    }
+    
+    public void IniciarJuego(){
+        
     }
    
 }
