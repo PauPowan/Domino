@@ -122,17 +122,24 @@ public class Jugador
                     }
                     break;
                     case "2":
-                    for(int i=piezasEnMano-1;i>=0;i--){
-                        if(mano[i].getIzquierda()==der||mano[i].getDerecha()==der){
-                            posicionPieza=i;
-                            direccion="der";
-                            valorBorde=der;
-                        }
+                    int menor=13;
+                    for(int i=0;i<piezasEnMano;i++){
                         if (mano[i].getIzquierda()==izq||mano[i].getDerecha()==izq){
-                            posicionPieza=i;
-                            direccion="izq";
-                            valorBorde=izq;
-                        }                        
+                            if(menor>=mano[i].getValorPieza()){
+                                menor=mano[i].getValorPieza();
+                                posicionPieza=i;
+                                direccion="izq";
+                                valorBorde=izq;
+                            }
+                        }
+                        if((mano[i].getIzquierda()==der||mano[i].getDerecha()==der)&&posicionPieza==-1){
+                            if(menor>=mano[i].getValorPieza()){
+                                menor=mano[i].getValorPieza();
+                                posicionPieza=i;
+                                direccion="izq";
+                                valorBorde=izq;
+                            }
+                        }
                     }
                     break;
                     case "3":

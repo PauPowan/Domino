@@ -99,14 +99,14 @@ public class Interfaz
 
     public void tablero(Pieza[] mano1,Pieza[] mano2,String est1,String est2,Pieza[] tablero,int turno){
         System.out.println("\n\n------------------\nTurno :"+Integer.toString(turno)); 
-        if(est1.equals("4")){
+        //if(est1.equals("4")){
         System.out.println("\n\n    Jugador 1: ");  
         mostrarPiezas(mano1);
-        }
-        if(est2.equals("4")){
+        //}
+        //if(est2.equals("4")){
         System.out.println("\n\n    Jugador 2: ");  
         mostrarPiezas(mano2);
-        }
+        //}
         System.out.println("\n\n    Tablero: ");  
         mostrarPiezas(tablero);
     }
