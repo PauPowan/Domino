@@ -27,9 +27,11 @@ public class Jugador
     public int getPiezasEnMano(){
         return  piezasEnMano;
     }
+
     public String getEstrategia(){
         return  estrategia;
     }
+
     public void tomarPieza(Pieza pieza){        
         mano[piezasEnMano]=new Pieza(-1,-1);
         mano[piezasEnMano].setPieza(pieza);
@@ -43,8 +45,6 @@ public class Jugador
         piezasEnMano--;
         return piezaASacar;
     }
-
-
 
     public void vaciarMano(){
         for(int i=0;i<piezasEnMano;i++){ 
@@ -185,31 +185,49 @@ public class Jugador
         return fin;
     }
 
-    public boolean dummy(Tablero tablero,int turno,Bolsa bolsa,int[] posicion){ 
-        boolean valido=false;
+    public boolean dummy(Tablero tablero,Bolsa bolsa,Interfaz interfaz,int numero){ 
+        boolean seguir=true;
+        boolean pasarTurno=false;
         Pieza pieza=new Pieza(-1,-1);
+        int[] posicion= new int[2];        
         int izq=tablero.getValorPiezaIzquierda();
         int der=tablero.getValorPiezaDerecha();
-        if(posicion[0]==-1){
-            tomarPieza(bolsa.sacarPieza());
-            valido=false;
-        }else{
-            if(posicion[1]==1&&(mano[posicion[0]-1].getIzquierda()==izq)||mano[posicion[0]-1].getDerecha()==izq){
-                mano[posicion[0]-1].acomodarPieza(izq,"izq");
-                pieza.setPieza(darPieza(posicion[0]-1));
-                tablero.agregarPieza(pieza,"izq");
-                acomodarMano();
-                valido=true;
+        do{            
+
+            if(!seguir){
+                interfaz.noValida(); 
             }
-            if(posicion[1]==2&&(mano[posicion[0]-1].getIzquierda()==der)||mano[posicion[0]-1].getDerecha()==der){
-                mano[posicion[0]-1].acomodarPieza(der,"der");
-                pieza.setPieza(darPieza(posicion[0]-1));
-                tablero.agregarPieza(pieza,"der");
-                acomodarMano();
-                valido=true;
+            posicion=interfaz.preguntar(getPiezasEnMano(),numero);
+            seguir=false;
+            if(posicion[0]==(getPiezasEnMano()+1)){
+                if(bolsa.getPiezasTotales()==0){
+                    interfaz.llena();  
+                }else{
+                    tomarPieza(bolsa.sacarPieza());                        
+                }
+                seguir=true; 
+            }else if(posicion[0]==0){
+                seguir=true;
+                pasarTurno=true;
+            }else{
+                if(posicion[1]==1&&(mano[posicion[0]-1].getIzquierda()==izq)||mano[posicion[0]-1].getDerecha()==izq){
+                    mano[posicion[0]-1].acomodarPieza(izq,"izq");
+                    pieza.setPieza(darPieza(posicion[0]-1));
+                    tablero.agregarPieza(pieza,"izq");
+                    acomodarMano();
+                    seguir=true;
+                }
+                if(posicion[1]==2&&(mano[posicion[0]-1].getIzquierda()==der)||mano[posicion[0]-1].getDerecha()==der){
+                    mano[posicion[0]-1].acomodarPieza(der,"der");
+                    pieza.setPieza(darPieza(posicion[0]-1));
+                    tablero.agregarPieza(pieza,"der");
+                    acomodarMano();
+                    seguir=true;
+                }
             }
-        }
-        return valido;
+
+        }while(!seguir);
+        return pasarTurno;
     }
 
     private void acomodarMano(){
