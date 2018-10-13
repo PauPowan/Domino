@@ -1,6 +1,6 @@
 
 /**
- * Write a description of class Interfaz here.
+ * Muestra la interfaz para que el usuario interactúe con ella y usa los métodos que imprimen los menús para que funcionen.
  *
  * @author (your name)
  * @version (a version number or a date)
@@ -13,7 +13,13 @@ public class Interfaz{
         input=new Scanner(System.in);
 
     }
-
+    
+    /**
+     * @Funcion: Imprime el primer menu del juego. 
+     * @Param: 
+     * 
+     
+     */
     public String imprimirMenu(){
 
         System.out.print('\u000C');
