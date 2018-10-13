@@ -27,11 +27,6 @@ public class Interfaz
         return input.next();
     }
 
-    public void imprimir(String mensaje)
-    {
-
-    }
-
     public String escogerJugador(String identificadorJugador){
         String numeroJugador="1";
         do{
