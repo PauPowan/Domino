@@ -31,13 +31,20 @@ public class Jugador
     public String getEstrategia(){
         return  estrategia;
     }
-
+    /*
+     * @Función: Agarra una pieza para agregarla a la mano.
+     * @Param:  pieza,tipo Pieza, es  la pieza que va a ser agregada en la mano.
+     */
     public void tomarPieza(Pieza pieza){        
         mano[piezasEnMano]=new Pieza(-1,-1);
         mano[piezasEnMano].setPieza(pieza);
         piezasEnMano++;
     }
-
+    /*
+     * @Función: Saca una pieza de la mano para darla al tablero.
+     * @Param:  
+     * @Return: numeroPieza,tipo int,La pieza que se leva a entregar al tablero.
+     */
     public Pieza darPieza(int numeroPieza){
         Pieza piezaASacar=new Pieza(0,0);
         piezaASacar.setPieza(mano[numeroPieza]);
@@ -45,7 +52,11 @@ public class Jugador
         piezasEnMano--;
         return piezaASacar;
     }
-
+    /*
+     * @Función: 
+     * @Param:
+     * @Return
+     */
     public void vaciarMano(){
         for(int i=0;i<piezasEnMano;i++){ 
             mano[i]=null; 
@@ -136,8 +147,8 @@ public class Jugador
                             if(menor>=mano[i].getValorPieza()){
                                 menor=mano[i].getValorPieza();
                                 posicionPieza=i;
-                                direccion="izq";
-                                valorBorde=izq;
+                                direccion="der";
+                                valorBorde=der;
                             }
                         }
                     }
@@ -154,12 +165,12 @@ public class Jugador
                                 valorBorde=izq;
                             }
                         }
-                        if((mano[i].getIzquierda()==der||mano[i].getDerecha()==der)&&posicionPieza==-1){
+                        if((mano[i].getIzquierda()==der||mano[i].getDerecha()==der)){
                             if(mayor<=mano[i].getValorPieza()){
                                 mayor=mano[i].getValorPieza();
                                 posicionPieza=i;
-                                direccion="izq";
-                                valorBorde=izq;
+                                direccion="der";
+                                valorBorde=der;
                             }
                         }
 
