@@ -6,18 +6,15 @@
  * @version (a version number or a date)
  */
 import java.util.*;
-public class Interfaz
-{
+public class Interfaz{
     private Scanner input;
 
-    public Interfaz()
-    {
+    public Interfaz(){
         input=new Scanner(System.in);
 
     }
 
-    public String imprimirMenu()
-    {
+    public String imprimirMenu(){
 
         System.out.print('\u000C');
         System.out.print("~~~~~~~~~~~~DOMINO~~~~~~~~~~~\n\n"+
@@ -26,7 +23,7 @@ public class Interfaz
             " 3. Salir                     \n\n");
         return input.next();
     }
-
+        
     public String escogerJugador(String identificadorJugador){
         String numeroJugador="1";
         do{
@@ -115,21 +112,24 @@ public class Interfaz
     public void noValida(){
         System.out.println("\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\nLa ficha no es valida con el borde escogido.\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
     }
-     public void llena(){
+    
+    public void llena(){
         System.out.println("\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\nYa no hay mas piezas disponibles en la bolsa.\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
     }
+    
     public int[] preguntar(int piezasEnMano,int numero){
         int pos[]=new int[2];
         pos[0]=1;
         pos[1]=1;
-        do{
+       do{
             if(pos[0]>piezasEnMano||pos[0]<0){
                 System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n Escoja una ficha válida.\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
             }
             System.out.println("\n\n Que ficha desea escoger,Jugador "+Integer.toString(numero+1)+": (1-"+Integer.toString(piezasEnMano)+")\n( 0 para pasar y "+Integer.toString(piezasEnMano+1)+" para comer )\n");
             pos[0]=input.nextInt();            
-        }while(pos[0]>piezasEnMano+1||pos[0]<0);
-        if(pos[0]!=0&&pos[0]!=piezasEnMano+1){
+       }while(pos[0]>piezasEnMano+1||pos[0]<0);
+       
+       if(pos[0]!=0&&pos[0]!=piezasEnMano+1){
             do{
                 if(pos[1]>2||pos[1]<1){
                     System.out.println(" Escoja una direccion valida.");
@@ -139,7 +139,7 @@ public class Interfaz
                     "     2-Derecha\n");
                 pos[1]=input.nextInt();
             }while(pos[1]>2||pos[1]<1);
-        }
+       }
         return pos;
     }
 
@@ -157,8 +157,8 @@ public class Interfaz
     }
 
     public void torneo(String j1,String j2,String j3){
-        System.out.print('\u000C');
-        System.out.println("Torneo:                   \n\n"+
+       System.out.print('\u000C');
+       System.out.println("Torneo:                   \n\n"+
             "        Ganador!          \n"+
             "           |              \n"+
             "       ____|____          \n"+

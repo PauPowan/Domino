@@ -23,9 +23,11 @@ public class Bolsa
         }
 
     }
+    
     public Pieza[] getBolsa(){
         return bolsa;
     }
+    
     public void barajar(){
         int Temp1;
         int Temp2;
@@ -50,7 +52,7 @@ public class Bolsa
         piezasTotales--;
         return piezaASacar;
     }
-    //borrar este
+    
     public Pieza[] getMano(){
         return bolsa;
     }
