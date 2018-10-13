@@ -228,14 +228,14 @@ public class Jugador
                 seguir=true;
                 pasarTurno=true;
             }else{
-                if(posicion[1]==1&&(mano[posicion[0]-1].getIzquierda()==izq)||mano[posicion[0]-1].getDerecha()==izq){
+                if(posicion[1]==1&&(mano[posicion[0]-1].getIzquierda()==izq||mano[posicion[0]-1].getDerecha()==izq)){
                     mano[posicion[0]-1].acomodarPieza(izq,"izq");
                     pieza.setPieza(darPieza(posicion[0]-1));
                     tablero.agregarPieza(pieza,"izq");
                     acomodarMano();
                     seguir=true;
                 }
-                if(posicion[1]==2&&(mano[posicion[0]-1].getIzquierda()==der)||mano[posicion[0]-1].getDerecha()==der){
+                if(posicion[1]==2&&(mano[posicion[0]-1].getIzquierda()==der||mano[posicion[0]-1].getDerecha()==der)){
                     mano[posicion[0]-1].acomodarPieza(der,"der");
                     pieza.setPieza(darPieza(posicion[0]-1));
                     tablero.agregarPieza(pieza,"der");
