@@ -1,6 +1,6 @@
 
 /**
- * Write a description of class Tablero here.
+ * Brinda donde jugar al domino 
  *
  * @author (your name)
  * @version (a version number or a date)
@@ -14,22 +14,12 @@ public class Tablero
         tablero= new Pieza[29];
         piezasEnTablero=0;
     }
-
-    public void ej(){
-        Pieza a =new Pieza(1,2);
-        Pieza b =new Pieza(4,4);
-        Pieza c =new Pieza(5,6);
-        agregarPieza(a,"izq");
-        agregarPieza(b,"izq");
-        agregarPieza(c,"izq");
-        agregarPieza(a,"derecha");
-        agregarPieza(b,"izq");
-        agregarPieza(c,"izq");
-        agregarPieza(a,"izq");
-        agregarPieza(b,"derecha");
-        agregarPieza(c,"derecha");
-    }
-
+    
+    /**
+     * @Funcion: Indica donde poner la pieza
+     * @Param: pieza, objeto de tipo Pieza, se usa para obtener las fichas que se van a agregar 
+     * @Param: direccion, string, se usa para colocar la ficha a la izq o a la derecha en el tablero
+     */
     public void agregarPieza(Pieza pieza,String direccion){
         int posicion=0;
         if(direccion.equalsIgnoreCase("izq")){
@@ -45,7 +35,9 @@ public class Tablero
         tablero[posicion].setPieza(pieza);
         piezasEnTablero++;
     }
-
+    /**
+     *@Funcion: Limpia el tablero. 
+     */
     public void vaciarTablero(){
         for(int i=0;i<=piezasEnTablero;i++){
             tablero[i]=null;

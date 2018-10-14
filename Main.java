@@ -1,9 +1,10 @@
 
 /**
- * Write a description of class Main here.
+ * Crea el domino
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author (Sergio Martinez B84621)
+ * @author (Paula Po Wo On B86080)
+ * @author (Diego Chinchilla B82227) 
  */
 public class Main
 {

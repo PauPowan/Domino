@@ -15,11 +15,14 @@ public class Jugador
         puntos=0;
         estrategia=numeroJugador;
     }
-
+    /**
+     * @Funcion:  Suma los puntos del jugador
+     * @Param: puntosMas, int, se usa para sumar los puntos del jugador 
+     */
     public void sumarPuntos(int puntosMas){
         this.puntos+=puntosMas;
     }
-
+   
     public int getPuntos(){
         return puntos;
     }
@@ -31,7 +34,7 @@ public class Jugador
     public String getEstrategia(){
         return  estrategia;
     }
-    /*
+    /**
      * @Función: Agarra una pieza para agregarla a la mano.
      * @Param:  pieza,tipo Pieza, es  la pieza que va a ser agregada en la mano.
      */
@@ -40,10 +43,10 @@ public class Jugador
         mano[piezasEnMano].setPieza(pieza);
         piezasEnMano++;
     }
-    /*
+    /**
      * @Función: Saca una pieza de la mano para darla al tablero.
-     * @Param:  
-     * @Return: numeroPieza,tipo int,La pieza que se leva a entregar al tablero.
+     * @Param:  numeroPieza,tipo int,La pieza que se le va a entregar al tablero.
+     * @Return: retorna la pieza que se le va a entregar al tablero.
      */
     public Pieza darPieza(int numeroPieza){
         Pieza piezaASacar=new Pieza(0,0);
@@ -52,10 +55,8 @@ public class Jugador
         piezasEnMano--;
         return piezaASacar;
     }
-    /*
-     * @Función: 
-     * @Param:
-     * @Return
+    /**
+     * @Función: Deja la mano vacía
      */
     public void vaciarMano(){
         for(int i=0;i<piezasEnMano;i++){ 
@@ -67,7 +68,10 @@ public class Jugador
     public Pieza[] getMano(){
         return mano;
     }
-
+    /**
+     * @Funcion: Dice si el jugador posee par o no
+     * @Return: Retorna si hay una ficha par o no 
+     */
     public boolean existePar(){
         Boolean par=false;
         for(int i=0;i<piezasEnMano;i++){
@@ -77,7 +81,10 @@ public class Jugador
         }
         return par;
     }
-
+    /**
+     * @Funcion: se usa para encontrar la pieza doble mas alta 
+     * @Return: retorna la posicion de la pieza mayor y su valor 
+     */
     public int[] parMayor(){
         int[] piezaMayor=new int[2];
         int valorMayor=-1;
@@ -94,13 +101,23 @@ public class Jugador
         piezaMayor[1]=posicionDelMayor;
         return piezaMayor;
     }
-
+    /**
+     * @Funcion: devolver el doble mas alto.  
+     * @Return: retorna el doble mas alto.
+     */
     public Pieza darParMayor(){
         Pieza piezaMayor=null;
         piezaMayor=darPieza(parMayor()[1]);
         return piezaMayor;
     }
 
+    /**
+     * @Funcion: Pone una pieza en el tablero en cada turno. 
+     * @Param: tablero, objecto de tipo Tablero,se usa para saber los bordes de las fichas y para poner fichas  
+     * @Param: turno, int, se usa para 
+     * @Param: bolsa, objeto de tipo Bolsa,se usa para poder comer una ficha en caso de no tener
+     * @Return: retorna el paso del turno  
+     */
     public boolean ponerPieza(Tablero tablero,int turno,Bolsa bolsa){
         int posicionPieza=-1;
         boolean salir=false;
@@ -202,7 +219,14 @@ public class Jugador
         }
         return fin;
     }
-
+    /**
+     * @Funcion: Crea al jugador dummy que es controlado el humano. 
+     * @Param: tablero, objeto de tipo Tablero, se usa para saber los bordes de las fichas y para poner fichas
+     * @Param: bolsa, objeto de tipo Bolsa, se usa si el jugador ocupa comer una ficha 
+     * @Param: interfaz, objeto de tipo Interfaz, se usa para llamar a la interfaz 
+     * @Param: numero, int, se usa para saber cuantas fichas tiene el jugador  
+     * @Return: retorna el paso de turno 
+     */
     public boolean dummy(Tablero tablero,Bolsa bolsa,Interfaz interfaz,int numero){ 
         boolean seguir=true;
         boolean pasarTurno=false;
@@ -247,7 +271,9 @@ public class Jugador
         }while(!seguir);
         return pasarTurno;
     }
-
+    /**
+     * @Funcion: Ordena las fichas para que no queden null entre fichas
+     */
     private void acomodarMano(){
         for(int i=0;i<mano.length;i++){
             if(mano[i]==null){
@@ -258,7 +284,7 @@ public class Jugador
             }
         }
     }
-
+  
     public int getPuntajeMano(){
         int puntajeTotal=0;
         for(int i=0;i<piezasEnMano;i++){

@@ -1,9 +1,6 @@
 
 /**
- * Write a description of class Domino here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * Contiene las opciones del juego. 
  */
 public class Domino{
     private Interfaz interfaz;
@@ -15,7 +12,9 @@ public class Domino{
         dealer=new Dealer();
         iniciarJuego();
     }
-
+    /**
+     * @Funcion: Brinda la interfaz para que se pueda crear la partida.
+     */
     private void iniciarJuego(){
         String opc;
 
@@ -38,7 +37,13 @@ public class Domino{
         }while(opc!="3");
         System.exit(0);
     }
-
+    /**
+     * @Funcion: Crea una partida entre los jugadores que se indiquen.
+     * @Param: jugA, string, se usa para definir la estrategia que va a usar cada jugador. 
+     * @Param: jugB, string, se usa para definir la estrategia que va a usar cada jugador. 
+     * @Return: retorna el ganador del enfrentamiento. 
+     */
+    
     public Jugador enfrentamientoSimple(String jugA,String jugB){
         Jugador[] jugador=new Jugador[2];
         jugador[0]= new Jugador(jugA);
@@ -55,8 +60,13 @@ public class Domino{
         interfaz.ganador(ganador+1);
         return jugador[ganador];
     }
-
-    public  int duelo(int partida,Jugador[] jugador){
+    /**
+     *@Funcion: Agarra las estrategias y empieza a crear una forma de juego conforme a las fichas.
+     *@Param: partida, int, usado para indicar el numero de partida.  
+     *@Param: jugador, vector de objeto Jugador, se usa para obtener los jugadores.  
+     *@Return: retorna la posicion del ganador en el vector de jugadores. 
+     */
+    public int duelo(int partida,Jugador[] jugador){
         int[] ganador= new int[2];
         int turno=1;
         int turnoJugador;
@@ -111,7 +121,10 @@ public class Domino{
         return ganador[0];
     }
 
-
+    /**
+     * @Funcion: Lleva el control de los turnos. 
+     * @Return: cambia de turno. 
+     */
     public int cambiarTurno(int turno){
         int nuevoTurno;
        if (turno==0){
@@ -121,7 +134,10 @@ public class Domino{
        }
        return nuevoTurno;
     }
-
+    /**
+     * @Funcion: Crea la modalidad de torneo en donde se crean parejas aleatorias en la primera ronda, 
+     * @Funcion: el que gana pasa a la siguiente ronda y el que pierde queda fuera y esto se repite hasta que haya un ganador.  
+     */
     public void torneo(){
         String[] tipos={"1","2","3","4"};
         barajar(tipos);
@@ -140,7 +156,10 @@ public class Domino{
         Jugador ganador=enfrentamientoSimple(ganador1.getEstrategia(),ganador2.getEstrategia());
         interfaz.ganadorTorneo(ganador.getEstrategia());
     }
-
+    /**
+     * @Funcion: Revuelve el vector de estrategias para asignaler una estrategia aleatoria a los diferentes jugadores del torneo. 
+     * @Param: tipos, vector de strings,vector que contiene las distintas estrategias. 
+     */
     private void barajar(String[] tipos){
         int Temp1;
         int Temp2;
@@ -150,7 +169,12 @@ public class Domino{
             swap(Temp1,Temp2,tipos);
         }
     }
-
+    /**
+     * @Funcion: baraja las fichas.
+     * @Param: posicion1, int, se usa para el intercambio. 
+     * @Param: posicion2, int, se usa para el intercambio.
+     * @Param: tipos, vector de strings, vector que contiene las estrategias, se usa para intercambiar estrategias.  
+     */
     private void swap(int posicion1,int posicion2,String[] tipos){
         String temp="";
         temp=tipos[posicion1];
